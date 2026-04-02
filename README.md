@@ -1,1 +1,0 @@
-# guide.whatauth.com

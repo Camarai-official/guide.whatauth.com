@@ -1,0 +1,49 @@
+{
+  "paso1": {
+    "titulo": "Instalación del SDK de WhatAuth",
+    "subtitulo": "En este paso aprenderás a instalar el SDK básico de WhatAuth en tu proyecto",
+    "codigo": {
+      "lenguaje": "bash",
+      "contenido": "npm install @whatauth/sdk\n# o con yarn\nyarn add @whatauth/sdk"
+    }
+  },
+  "paso2": {
+    "titulo": "Configuración inicial",
+    "subtitulo": "Configura las credenciales y parámetros iniciales para conectar con WhatAuth",
+    "capturas": ["public/capturas/paso2.jpg"],
+    "codigo": {
+      "lenguaje": "javascript",
+      "contenido": "import { WhatAuthSDK } from '@whatauth/sdk';\n\nconst whatAuth = new WhatAuthSDK({\n  apiKey: 'tu-api-key-aqui',\n  environment: 'development'\n});"
+    }
+  },
+  "paso3": {
+    "titulo": "Implementación de autenticación",
+    "subtitulo": "Implementa el flujo de autenticación básico en tu aplicación",
+    "codigo": {
+      "lenguaje": "javascript",
+      "contenido": "async function authenticateUser(email, password) {\n  try {\n    const result = await whatAuth.authenticate({\n      email,\n      password\n    });\n    \n    if (result.success) {\n      localStorage.setItem('token', result.token);\n      return result.user;\n    }\n  } catch (error) {\n    console.error('Error de autenticación:', error);\n  }\n}"
+    }
+  },
+  "paso4": {
+    "titulo": "Pruebas y validación",
+    "subtitulo": "Verifica que todo funciona correctamente con las pruebas de integración",
+    "capturas": ["public/capturas/paso4.jpg"],
+    "codigo": {
+      "lenguaje": "javascript",
+      "contenido": "// Test de integración\nconst testAuth = async () => {\n  const testUser = await authenticateUser(\n    'test@example.com',\n    'password123'\n  );\n  \n  console.log('Usuario autenticado:', testUser);\n};\n\ntestAuth();"
+    }
+  },
+  "paso5": {
+    "titulo": "Despliegue en producción",
+    "subtitulo": "Prepara tu aplicación para el entorno de producción",
+    "capturas": ["public/capturas/paso5.jpg"]
+  },
+  "paso6": {
+    "titulo": "Resumen final",
+    "subtitulo": "Revisa los puntos clave y próximos pasos",
+    "codigo": {
+      "lenguaje": "javascript",
+      "contenido": "// Checklist final de implementación\nconst implementationChecklist = {\n  sdkInstalled: true,\n  configured: true,\n  authentication: true,\n  tested: true,\n  deployed: false // Pendiente\n};\n\nconsole.log('Estado final:', implementationChecklist);"
+    }
+  }
+}
