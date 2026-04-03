@@ -1,49 +1,85 @@
 {
   "paso1": {
-    "titulo": "Instalación del SDK de WhatAuth",
-    "subtitulo": "En este paso aprenderás a instalar el SDK básico de WhatAuth en tu proyecto",
-    "codigo": {
-      "lenguaje": "bash",
-      "contenido": "npm install @whatauth/sdk\n# o con yarn\nyarn add @whatauth/sdk"
-    }
+    "titulo": "Iniciar - Crear cuenta en Cloudflare",
+    "subtitulo": "En este paso aprenderás a crear una cuenta en Cloudflare",
+    "contenido": "Para crear una cuenta en Cloudflare, visita https://dash.cloudflare.com/sign-up y sigue los pasos. Para continuar entraremos en el apartado \"Computo\" que se encuentra en el apartado de la izquierda y finalmente pulsaremos en Workers y Pages",
+    "capturas": ["public/capturas/paso1.webp"]
   },
   "paso2": {
-    "titulo": "Configuración inicial",
-    "subtitulo": "Configura las credenciales y parámetros iniciales para conectar con WhatAuth",
-    "capturas": ["public/capturas/paso2.jpg"],
-    "codigo": {
-      "lenguaje": "javascript",
-      "contenido": "import { WhatAuthSDK } from '@whatauth/sdk';\n\nconst whatAuth = new WhatAuthSDK({\n  apiKey: 'tu-api-key-aqui',\n  environment: 'development'\n});"
-    }
+    "titulo": "Descarga el Worker de Cloudflare",
+    "subtitulo": "Descarga el worker de Cloudflare desde el siguiente enlace",
+    "contenido": "Descarga el worker de Cloudflare desde aquí: /Cloudflare%20Worker.zip. Cuando se descargue, descomprímelo",
+    "capturas": ["public/capturas/paso2.webp"]
   },
   "paso3": {
-    "titulo": "Implementación de autenticación",
-    "subtitulo": "Implementa el flujo de autenticación básico en tu aplicación",
-    "codigo": {
-      "lenguaje": "javascript",
-      "contenido": "async function authenticateUser(email, password) {\n  try {\n    const result = await whatAuth.authenticate({\n      email,\n      password\n    });\n    \n    if (result.success) {\n      localStorage.setItem('token', result.token);\n      return result.user;\n    }\n  } catch (error) {\n    console.error('Error de autenticación:', error);\n  }\n}"
-    }
+    "titulo": "Instalar Node.js",
+    "subtitulo": "Instala Node.js en tu ordenador",
+    "contenido": "Descarga Node.js desde https://nodejs.org/dist/v24.14.1/node-v24.14.1-x64.msi y sigue los pasos de instalación. Verifica que se ha instalado correctamente ejecutando 'node -v' en tu terminal.",
+    "capturas": ["public/capturas/paso3.webp"]
   },
   "paso4": {
-    "titulo": "Pruebas y validación",
-    "subtitulo": "Verifica que todo funciona correctamente con las pruebas de integración",
-    "capturas": ["public/capturas/paso4.jpg"],
+    "titulo": "Instala las depencias de Node",
+    "subtitulo": "Instala las depencias de Node ejecutando 'npm install' en la terminal",
+    "capturas": ["public/capturas/paso4.webp"],
     "codigo": {
-      "lenguaje": "javascript",
-      "contenido": "// Test de integración\nconst testAuth = async () => {\n  const testUser = await authenticateUser(\n    'test@example.com',\n    'password123'\n  );\n  \n  console.log('Usuario autenticado:', testUser);\n};\n\ntestAuth();"
+      "lenguaje": "bash",
+      "contenido": "npm install"
     }
   },
   "paso5": {
-    "titulo": "Despliegue en producción",
-    "subtitulo": "Prepara tu aplicación para el entorno de producción",
-    "capturas": ["public/capturas/paso5.jpg"]
+    "titulo": "Reemplaza las variables",
+    "subtitulo": "Reemplazo y configuración de variables",
+    "contenido": "Reemplaza el archivo .dev.vars.example y cambia su nombre por .dev.vars. \n Una vez cambiado el nombre, reemplaza las variables con los siguientes valores: \n ALLOWED_FRONTEND_ORIGINS -> Esta será la URL de tu página web en la que has instalado el SDK \n JWT_SIGNING_KEY -> Esta será la clave de firma JWT que deberías de cambiar por una más segura \n CLOUDFLARE_API_TOKEN -> Esta será el token de API de Cloudflare que has generado en este paso (imagen) \n ALLOWED_COUNTRIES -> Esta será el código de país de tu país (ej: ES para España) Si quieres bloquear accesos de fuera de España, deja este valor como está unicamente con ES",
+    "capturas": ["public/capturas/paso5.webp"]
   },
   "paso6": {
-    "titulo": "Resumen final",
-    "subtitulo": "Revisa los puntos clave y próximos pasos",
+    "titulo": "Instalación del Worker en tu Cloudflare",
+    "subtitulo": "Instalación del Worker en tu Cloudflare",
+    "contenido": "Para instalar el Worker en tu Cloudflare, ejecuta 'npm wrangler deploy' en la terminal. Esto desplegará el Worker en tu cuenta de Cloudflare.",
+    "capturas": ["public/capturas/paso6.webp"],
     "codigo": {
-      "lenguaje": "javascript",
-      "contenido": "// Checklist final de implementación\nconst implementationChecklist = {\n  sdkInstalled: true,\n  configured: true,\n  authentication: true,\n  tested: true,\n  deployed: false // Pendiente\n};\n\nconsole.log('Estado final:', implementationChecklist);"
+      "lenguaje": "bash",
+      "contenido": "npm wrangler deploy"
     }
+  },
+  "paso7": {
+    "titulo": "Descarga el dashboard demo",
+    "subtitulo": "Descarga el dashboard demo desde el siguiente enlace",
+    "contenido": "Descarga el dashboard demo desde aquí: /Dashboard%20Demo.zip. Cuando se descargue, descomprímelo",
+    "capturas": ["public/capturas/paso7.webp"]
+  },
+  "paso8": {
+    "titulo": "Instala las dependencias del dashboard",
+    "subtitulo": "Instala las dependencias del dashboard_simple ejecutando 'npm install' en la terminal y modifica el .env para añadir los datos necesarios. VITE_WHATSAPP_NUMBER -> Este es el número de Whatsapp que tendrá asociado Evolution API (Recuerda que no tenga +34, unicamente 34). VITE_WHATAUTH_WORKER_URL -> Esta es la URL del Worker que has desplegado en Cloudflare. VITE_WHATAUTH_CLIENT_ID -> Este será el ID del cliente que generarás en la web de generator.whatauth.com. VITE_WHATAUTH_TENANT_SLUG -> Por defecto será 'default' pero para tener más control deberías de usar el que genera la web de generator.whatauth.com",
+    "capturas": ["public/capturas/paso8.webp"],
+    "codigo": {
+      "lenguaje": "bash",
+      "contenido": "npm install"
+    }
+  },
+  "paso9": 
+  {
+    "titulo": "Dependencias y Compilación",
+    "subtitulo": "Instala las dependencias del SDK y compílalo",
+    "contenido": "Instala las dependencias del SDK y compílalo ejecutando 'npm install' y 'npm run build' en la terminal.",
+    "capturas": ["public/capturas/paso9.webp"],
+    "codigo": {
+      "lenguaje": "bash",
+      "contenido": "npm install\nnpm run build"
+    }
+  },
+  "paso10": 
+  {
+    "titulo": "Inicia el Dashboard",
+    "subtitulo": "Inicia el dashboard ejecutando 'npm run dev' en la terminal.",
+    "contenido": "Inicia el dashboard ejecutando 'npm run dev' en la terminal. Comprueba que al escanear el código QR o al abrir Whatsapp desde el botón y enviar el mensaje inicia sesión automáticamente. Cuando se inicie sesión aparecerá tu nombre y número de teléfono",
+    "capturas": ["public/capturas/paso10.webp"]
+  },
+  "paso11": 
+  {
+    "titulo": "Felicidades has completado la instalación",
+    "subtitulo": "Ahora puedes usar la lógica que tiene los ficheros de Login y Dashboard para integrarla en tu página web",
+    "contenido": "public/capturas/celebration.gif",
+    "capturas": ["public/capturas/whatauth.webp"]
   }
 }
